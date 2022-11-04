@@ -45,15 +45,18 @@ void admit_Patient()
 
     printf("Enter Patient name: ");
     fflush(stdin);        // fflush is used to immediately flush out the contents of an output stream.
-    gets(p.patient_Name); // gets used for string. ease to take char
+    fgets(p.patient_Name,250,stdin); // gets used for string. ease to take char
+    //gets(p.patient_Name);
 
     printf("Enter Patient Address: ");
     fflush(stdin);
-    gets(p.patient_Address);
+    fgets(p.patient_Address,250,stdin);
+    //gets(p.patient_Address);
 
     printf("Enter Patient Disease: ");
     fflush(stdin);
-    gets(p.disease);
+    fgets(p.disease,250,stdin);
+    //gets(p.disease);
 
     printf("\nThe patient have been successfully added");
 
@@ -66,14 +69,14 @@ void patient_List()
 
     system("cls"); // done to clear to previous contains
     printf("** Patient List **\n\n\n");
-    printf("%-10s %-30s %-30s %-20s %s\n", "Identity", "Patient Name", "Address", "Disease", "Date"); // -10 -30 is done to create gap // 10 spaces before the string state is printed
+    printf("%-10s %-30s %-30s %-20s %s\n", "Identity", "Patient Name", "Address", "Disease", "Date"); // 10 spaces before the string state is printed
     printf("------------------------------------------------------------------------------------------------------------------\n");
 
     fp = fopen("patient.txt", "rb"); 
 
-    while (fread(&p, sizeof(p), 1, fp) == 1) // one by one check garxa. if equal to 1 it means it is found in the record.
+    while (fread(&p, sizeof(p), 1, fp) == 1) // one by one check. if equal to 1 it means it is found in the record.
     {
-        printf("%-10d %-30s %-30s %-20s %s\n", p.identity, p.patient_Name, p.patient_Address, p.disease, p.date);
+        printf("%-10d %-50s %-90s %-110s %s", p.identity, p.patient_Name, p.patient_Address, p.disease, p.date);
     }
 
     fclose(fp); // close the file.
@@ -142,15 +145,15 @@ void add_Doctor()
 
     printf("Enter Doctor Name: ");
     fflush(stdin);
-    gets(d.name);
+    fgets(d.name,250,stdin);
 
     printf("Enter Doctor Address: ");
     fflush(stdin);
-    gets(d.address);
+    fgets(d.address,250,stdin);
 
     printf("Doctor Specialize in: ");
     fflush(stdin);
-    gets(d.specialize);
+    fgets(d.specialize,250,stdin);
 
     printf("Doctor Added Successfully\n\n");
 
@@ -169,7 +172,8 @@ void doctor_List()
     fp = fopen("doctor.txt", "rb");
     while (fread(&d, sizeof(d), 1, fp) == 1)
     {
-        printf("%-10d %-30s %-30s %-30s %s\n", d.identity, d.name, d.address, d.specialize, d.date);
+       printf("%-10d %-50s %-90s %-110s %s", d.identity, d.name, d.address, d.specialize, d.date);
+       
     }
 
     fclose(fp);
