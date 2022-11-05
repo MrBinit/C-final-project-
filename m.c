@@ -7,18 +7,18 @@
 struct patient
 {
     int identity;
-    char patient_Name[50];
-    char patient_Address[50];
-    char disease[50];
+    char patient_Name[250];
+    char patient_Address[250];
+    char disease[250];
     char date[12];
 } p;
 
 struct doctor
 {
     int identity;
-    char name[50];
-    char address[50];
-    char specialize[50];
+    char name[250];
+    char address[250];
+    char specialize[250];
     char date[12];
 } d;
 
@@ -76,7 +76,7 @@ void patient_List()
 
     while (fread(&p, sizeof(p), 1, fp) == 1) // one by one check. if equal to 1 it means it is found in the record.
     {
-        printf("%-10d %-50s %-90s %-110s %s", p.identity, p.patient_Name, p.patient_Address, p.disease, p.date);
+        printf("%-10d %-50s %-90s %-110s %s\n", p.identity, p.patient_Name, p.patient_Address, p.disease, p.date);
     }
 
     fclose(fp); // close the file.
@@ -172,7 +172,7 @@ void doctor_List()
     fp = fopen("doctor.txt", "rb");
     while (fread(&d, sizeof(d), 1, fp) == 1)
     {
-       printf("%-10d %-50s %-90s %-110s %s", d.identity, d.name, d.address, d.specialize, d.date);
+       printf("%-10d %-50s %-90s %-110s %s\n", d.identity, d.name, d.address, d.specialize, d.date);
        
     }
 
