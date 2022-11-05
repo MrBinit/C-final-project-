@@ -7,18 +7,18 @@
 struct patient
 {
     int identity;
-    char patient_Name[250];
-    char patient_Address[250];
-    char disease[250];
+    char patient_Name[50];
+    char patient_Address[50];
+    char disease[50];
     char date[12];
 } p;
 
 struct doctor
 {
     int identity;
-    char name[250];
-    char address[250];
-    char specialize[250];
+    char name[50];
+    char address[50];
+    char specialize[50];
     char date[12];
 } d;
 
@@ -46,17 +46,21 @@ void admit_Patient()
     printf("Enter Patient name: ");
     fflush(stdin);        // fflush is used to immediately flush out the contents of an output stream.
     fgets(p.patient_Name,250,stdin); // gets used for string. ease to take char
-    //gets(p.patient_Name);
+    p.patient_Name[strlen(p.patient_Name)-1]='\0';
+    
 
     printf("Enter Patient Address: ");
     fflush(stdin);
     fgets(p.patient_Address,250,stdin);
-    //gets(p.patient_Address);
+    p.patient_Address[strlen(p.patient_Address)-1]='\0'; //\0 means end of the string
+
+    
 
     printf("Enter Patient Disease: ");
     fflush(stdin);
     fgets(p.disease,250,stdin);
-    //gets(p.disease);
+    p.disease[strlen(p.disease)-1] = '\0';
+    
 
     printf("\nThe patient have been successfully added");
 
@@ -76,7 +80,7 @@ void patient_List()
 
     while (fread(&p, sizeof(p), 1, fp) == 1) // one by one check. if equal to 1 it means it is found in the record.
     {
-        printf("%-10d %-50s %-90s %-110s %s\n", p.identity, p.patient_Name, p.patient_Address, p.disease, p.date);
+        printf("%-10d %-30s %-30s %-20s %s\n", p.identity, p.patient_Name, p.patient_Address, p.disease, p.date);
     }
 
     fclose(fp); // close the file.
@@ -146,14 +150,18 @@ void add_Doctor()
     printf("Enter Doctor Name: ");
     fflush(stdin);
     fgets(d.name,250,stdin);
+    d.name[strlen(d.name)-1] = '\0'; 
+
 
     printf("Enter Doctor Address: ");
     fflush(stdin);
     fgets(d.address,250,stdin);
+    d.address[strlen(d.address)-1] = '\0';
 
     printf("Doctor Specialize in: ");
     fflush(stdin);
     fgets(d.specialize,250,stdin);
+    d.specialize[strlen(d.specialize)-1]= '\0';
 
     printf("Doctor Added Successfully\n\n");
 
@@ -172,7 +180,7 @@ void doctor_List()
     fp = fopen("doctor.txt", "rb");
     while (fread(&d, sizeof(d), 1, fp) == 1)
     {
-       printf("%-10d %-50s %-90s %-110s %s\n", d.identity, d.name, d.address, d.specialize, d.date);
+       printf("%-10d %-30s %-30s %-30s %s\n", d.identity, d.name, d.address, d.specialize, d.date);
        
     }
 
